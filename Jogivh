@@ -1,0 +1,35 @@
+import random
+
+class Fighter:
+    def __init__(self, name, health, attack):
+        self.name = name
+        self.health = health
+        self.attack = attack
+
+    def take_damage(self, damage):
+        self.health -= damage
+
+    def attack_enemy(self, enemy):
+        damage = random.randint(0, self.attack)
+        enemy.take_damage(damage)
+        print(f"{self.name} attacked {enemy.name} for {damage} damage!")
+
+def main():
+    player = Fighter("Player", 100, 20)
+    enemy = Fighter("Enemy", 80, 15)
+
+    while player.health > 0 and enemy.health > 0:
+        player.attack_enemy(enemy)
+        if enemy.health <= 0:
+            print(f"{enemy.name} has been defeated!")
+            break
+
+        enemy.attack_enemy(player)
+        if player.health <= 0:
+            print(f"{player.name} has been defeated!")
+            break
+
+if __name__ == "__main__":
+    main()
+```
+
